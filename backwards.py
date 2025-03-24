@@ -13,12 +13,15 @@ def find_reversible():
     
     for word in words:
         reversed_words = word[::-1] # Reverses the word
-        if reversed_words in word_set and word != reversed_words:
-            result.append(word)
+        if reversed_words in word_set and word != reversed_words: # Checks if the reversed word exists and if it's a palindrome isntead.
+            result.append(word) # Adds the word to the result list
     
     return result
 
+# A simple list of words to test if it works
 words = ["stressed", "desserts", "level", "hello", "world", "drawer", "reward", "racecar"]
 
+# Calls the function and stores the results
 reversible_words = find_reversible()
+# Prints results
 print(reversible_words)
