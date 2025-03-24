@@ -13,7 +13,7 @@ def find_reversible():
     
     for word in words:
         reversed_words = word[::-1] # Reverses the word
-        if reversed_words in word_set and word != reversed_words: # Checks if the reversed word exists and if it's a palindrome isntead.
+        if reversed_words in word_set and word != reversed_words: # Checks if the reversed word exists and if it's a palindrome instead.
             result.append(word) # Adds the word to the result list
     
     return result
