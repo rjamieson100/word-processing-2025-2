@@ -11,7 +11,7 @@ def find_valid_words(word_list):
     # Loop through each word in the provided word list
     for word in word_list:
         
-        # Check if the word has at least 5 letters (important for odd-numbered letters)
+        # Check if the word has at least 5 letters (for odd-numbered letters)
         if len(word) >= 5:
             
             # Extract the odd-numbered letters from the word (1st, 3rd, 5th, ...)
