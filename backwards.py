@@ -1,27 +1,39 @@
-# List all the words for which the reversed word is also a word, but not a palindrome.
-# Example: STRESSED
-"""
-Finds words in the predefined list where the word backwards is a new word but not a palindrome.
+import requests
 
-Returns:
-    List: a list of words that meet the criteria.
-"""
-def find_reversible():
-    
-    word_set = set(words) # Converts the word list to a set and not a list because lists have a BigO of O(n) while sets have a Big O of O(1) meaning sets are faster to lookup.
-    result = [] # List to store valid words and have an order
-    
-    for word in words:
-        reversed_words = word[::-1] # Reverses the word
-        if reversed_words in word_set and word != reversed_words: # Checks if the reversed word exists and if it's a palindrome instead.
-            result.append(word) # Adds the word to the result list
-    
-    return result
+# Function to download the dictionary from GitHub
+def load_dictionary_from_github(url):
+    try:
+        response = requests.get(url)  # Try to get the file from GitHub
+        response.raise_for_status()  # Check if the request was successful (200 OK)
+        return set(response.text.strip().splitlines())  # Convert the file content to a set of words
+    except requests.exceptions.RequestException as e:  # Catch any request-related errors
+        print(f"Error downloading the dictionary: {e}")
+        return set()  # Return an empty set if there's an error
 
-# A simple list of words to test if it works
-words = ["stressed", "diaper", "deliver", "hello", "world", "drawer", "gateman", "racecar"]
+# URL of your dictionary file on GitHub (Raw file URL)
+dictionary_url = "https://raw.githubusercontent.com/rjamieson100/word-processing-2025-2/refs/heads/Backwards/dictionary.txt"
 
-# Calls the function and stores the results
-reversible_words = find_reversible()
-# Prints results
+# Load dictionary from GitHub
+dictionary = load_dictionary_from_github(dictionary_url)
+
+# Example input words to check
+input_words = ["stressed", "diaper", "drawer", "gateman", "racecar", "reward", "repaid"]
+
+# Function to find reversible non-palindromes (same as before)
+def find_reversible_non_palindromes(word_list, dictionary):
+    seen = set()
+    result = []
+
+    for word in word_list:
+        reversed_word = word[::-1].lower()
+
+        if reversed_word in dictionary and word.lower() != reversed_word and word.lower() not in seen:
+            result.append(word)
+            seen.add(word.lower())
+            seen.add(reversed_word)
+
+    return result if result else ["No reversible words found"]
+
+# Run the function
+reversible_words = find_reversible_non_palindromes(input_words, dictionary)
 print(reversible_words)
