@@ -19,7 +19,7 @@ def find_reversible():
     return result
 
 # A simple list of words to test if it works
-words = ["stressed", "daiper", "deliver", "hello", "world", "drawer", "gateman", "racecar"]
+words = ["stressed", "diaper", "deliver", "hello", "world", "drawer", "gateman", "racecar"]
 
 # Calls the function and stores the results
 reversible_words = find_reversible()
